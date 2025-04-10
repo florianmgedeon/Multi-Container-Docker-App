@@ -1,0 +1,24 @@
+name: Docker Compose Lint
+
+on:
+  push:
+    paths:
+      - 'srcs/docker-compose.yml'
+  pull_request:
+    paths:
+      - 'srcs/docker-compose.yml'
+
+jobs:
+  yamllint:
+    name: Check docker-compose.yml with yamllint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install yamllint
+        run: sudo apt-get update && sudo apt-get install -y yamllint
+
+      - name: Lint docker-compose.yml
+        run: yamllint srcs/docker-compose.yml
