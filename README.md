@@ -32,3 +32,7 @@ Before starting ensure to **fill out** the .env file in the srcs folder and all 
 
 After cloning the repository and adding the `.env` file and Docker secrets (see [Prerequisites](#-prerequisites)), simply run: make all
 Access the WordPress site at: [https://inception.42.fr](https://inception.42.fr) from your host machine's browser.
+
+## Github Actions
+
+Every time a commit modifies `srcs/docker-compose.yml`, the workflow runs to validate YAML syntax, indentation, formatting and common best practices.
