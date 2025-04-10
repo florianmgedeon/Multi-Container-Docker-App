@@ -28,6 +28,7 @@ Before starting ensure to **fill out** the .env file in the srcs folder and all 
 
 ## Usage
 
-After cloning the repository and adding the `.env` file and Docker secrets (see [🔧 Prerequisites](#-prerequisites)), simply run: make all
+After cloning the repository and adding the `.env` file and Docker secrets (see [Prerequisites](#-prerequisites)), simply run: make all
 Access the WordPress site at: [https://inception.42.fr](https://inception.42.fr) from your host machine's browser.
 
+![YAML Lint](https://github.com/florianmgedeon/Multi-Container-Docker-App/actions/workflows/yamllint.yml/badge.svg)
