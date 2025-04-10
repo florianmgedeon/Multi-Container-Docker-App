@@ -1,0 +1,101 @@
+networks:
+  inception_network:
+    driver: bridge
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/fgedeon/data/wordpress
+      o: bind
+
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/fgedeon/data/mariadb
+      o: bind
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./requirements/nginx
+      args:
+        IMAGE_TAG: v1.0
+    image: srcs-nginx:v1.0
+    ports:
+      - "443:443"
+    networks:
+      - inception_network
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/html:ro
+      - ./requirements/nginx/conf:/etc/nginx/conf.d
+    restart: on-failure
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+      args:
+        IMAGE_TAG: v1.0
+    image: srcs-wordpress:v1.0
+    expose:
+      - "9000"
+    networks:
+      - inception_network
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:/var/www/html
+    restart: on-failure
+    environment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
+      WP_ADMIN_USER: ${WP_ADMIN_USER}
+      WP_USER: ${WP_USER}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    secrets:
+      - admin_password
+      - user_password
+      - wp_secrets
+      - db_password
+
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb
+      args:
+        IMAGE_TAG: v1.0
+    image: srcs-mariadb:v1.0
+    expose:
+      - "3306"
+    networks:
+      - inception_network
+    volumes:
+      - mariadb:/var/lib/mysql
+    restart: on-failure
+    secrets:
+      - db_root_password
+      - db_password
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD_FILE: /run/secrets/db_password
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+
+secrets:
+  db_root_password:
+    file: ../secrets/db_root_password.txt
+  db_password:
+    file: ../secrets/db_password.txt
+  admin_password:
+    file: ../secrets/admin_password.txt
+  user_password:
+    file: ../secrets/user_password.txt
+  wp_secrets:
+    file: ../secrets/wp_secrets.txt

@@ -1,0 +1,10 @@
+.DS_Store
+*.swp
+*.swo
+*.tmp
+*.bak
+.git
+.gitignore
+secrets/
+.env
+*.txt
