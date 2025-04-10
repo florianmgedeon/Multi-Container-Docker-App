@@ -14,8 +14,8 @@ clean:
 fclean:
 	docker compose -f $(COMPOSE_FILE) down --volumes --remove-orphans --rmi all
 	docker system prune -af --volumes
-	sudo find /home/fgedeon/data/mariadb -mindepth 1 -exec rm -rf {} + 2>/dev/null || true
-	sudo find /home/fgedeon/data/wordpress -mindepth 1 -exec rm -rf {} + 2>/dev/null || true
+	sudo find /home/inception/data/mariadb -mindepth 1 -exec rm -rf {} + 2>/dev/null || true
+	sudo find /home/inception/data/wordpress -mindepth 1 -exec rm -rf {} + 2>/dev/null || true
 
 re: fclean all
 

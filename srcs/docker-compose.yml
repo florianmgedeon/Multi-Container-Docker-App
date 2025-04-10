@@ -7,14 +7,14 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: /home/fgedeon/data/wordpress
+      device: /home/inception/data/wordpress
       o: bind
 
   mariadb:
     driver: local
     driver_opts:
       type: none
-      device: /home/fgedeon/data/mariadb
+      device: /home/inception/data/mariadb
       o: bind
 
 services:
