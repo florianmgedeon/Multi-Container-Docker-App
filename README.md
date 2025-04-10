@@ -2,6 +2,8 @@
 
 A multi-container system built using Docker and Docker Compose, featuring a secure and modular web service architecture. This project was developed as part of the 42 curriculum.
 
+![YAML Lint](https://github.com/florianmgedeon/Multi-Container-Docker-App/actions/workflows/yamllint.yml/badge.svg)
+
 ## Project Overview
 
 The goal of Inception is to build a secure and scalable infrastructure using Docker containers, without relying on pre-built images. Each service is containerized, isolated, and orchestrated using `docker-compose`.
@@ -30,5 +32,3 @@ Before starting ensure to **fill out** the .env file in the srcs folder and all 
 
 After cloning the repository and adding the `.env` file and Docker secrets (see [Prerequisites](#-prerequisites)), simply run: make all
 Access the WordPress site at: [https://inception.42.fr](https://inception.42.fr) from your host machine's browser.
-
-![YAML Lint](https://github.com/florianmgedeon/Multi-Container-Docker-App/actions/workflows/yamllint.yml/badge.svg)
