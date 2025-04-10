@@ -100,4 +100,3 @@ secrets:
     file: ../secrets/user_password.txt
   wp_secrets:
     file: ../secrets/wp_secrets.txt
-    
